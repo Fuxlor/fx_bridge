@@ -19,10 +19,13 @@ exports('GetGang', Bridge.Jobs.GetGang)
 exports('HasGang', Bridge.Jobs.HasGang)
 
 -- ─── Inventory ───────────────────────────────────────────────────────────────
-exports('HasItem',    Bridge.Inventory.HasItem)
-exports('AddItem',    Bridge.Inventory.AddItem)
-exports('RemoveItem', Bridge.Inventory.RemoveItem)
-exports('GetItem',    Bridge.Inventory.GetItem)
+exports('HasItem',            Bridge.Inventory.HasItem)
+exports('AddItem',            Bridge.Inventory.AddItem)
+exports('RemoveItem',         Bridge.Inventory.RemoveItem)
+exports('GetItem',            Bridge.Inventory.GetItem)
+exports('GetItemSlots',       Bridge.Inventory.GetItemSlots)
+exports('HasItemWithMeta',    Bridge.Inventory.HasItemWithMeta)
+exports('RemoveItemWithMeta', Bridge.Inventory.RemoveItemWithMeta)
 
 -- ─── DB ──────────────────────────────────────────────────────────────────────
 exports('DBQuery',   Bridge.DB.Query)

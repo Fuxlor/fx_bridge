@@ -151,3 +151,17 @@ if Config.Debug then
         Bridge.Detected.fuel
     ))
 end
+
+
+RegisterCommand('fxcr', function()
+    ExecuteCommand('ensure fx_cardealer')
+end)
+RegisterCommand('fxgr', function()
+    ExecuteCommand('ensure fx_garages')
+end)
+RegisterCommand('fxvp', function()
+    ExecuteCommand('ensure fx_vehpersistence')
+end)
+RegisterCommand('fxvk', function()
+    ExecuteCommand('ensure fx_vehiclekeys')
+end)

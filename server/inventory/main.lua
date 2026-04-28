@@ -2,7 +2,7 @@
 
 Bridge.Inventory = Bridge.Inventory or {}
 
-local stubs = { 'HasItem', 'AddItem', 'RemoveItem', 'GetItem' }
+local stubs = { 'HasItem', 'AddItem', 'RemoveItem', 'GetItem', 'GetItemSlots', 'HasItemWithMeta', 'RemoveItemWithMeta' }
 for _, fn in ipairs(stubs) do
     if not Bridge.Inventory[fn] then
         Bridge.Inventory[fn] = function()

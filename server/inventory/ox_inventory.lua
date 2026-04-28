@@ -28,3 +28,40 @@ function Bridge.Inventory.GetItem(source, item)
     end
     return { count = total, metadata = meta }
 end
+
+-- Returns all slots for a given item (with full metadata per slot)
+function Bridge.Inventory.GetItemSlots(source, item)
+    return exports.ox_inventory:Search(source, 'slots', item) or {}
+end
+
+-- Check whether the player has at least one slot matching all filterMeta key/value pairs
+function Bridge.Inventory.HasItemWithMeta(source, item, filterMeta)
+    local slots = exports.ox_inventory:Search(source, 'slots', item)
+    if not slots then return false end
+    for _, slot in ipairs(slots) do
+        local meta = slot.metadata or {}
+        local match = true
+        for k, v in pairs(filterMeta) do
+            if meta[k] ~= v then match = false; break end
+        end
+        if match then return true end
+    end
+    return false
+end
+
+-- Remove one unit of item whose metadata matches filterMeta; returns true on success
+function Bridge.Inventory.RemoveItemWithMeta(source, item, filterMeta)
+    local slots = exports.ox_inventory:Search(source, 'slots', item)
+    if not slots then return false end
+    for _, slot in ipairs(slots) do
+        local meta = slot.metadata or {}
+        local match = true
+        for k, v in pairs(filterMeta) do
+            if meta[k] ~= v then match = false; break end
+        end
+        if match then
+            return exports.ox_inventory:RemoveItem(source, item, 1, nil, slot.slot) ~= false
+        end
+    end
+    return false
+end

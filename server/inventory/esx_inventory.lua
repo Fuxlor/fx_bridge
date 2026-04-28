@@ -2,8 +2,10 @@ if Bridge.Detected.inventory ~= 'esx_inventory' then return end
 
 Bridge.Inventory = Bridge.Inventory or {}
 
+ESX = exports['es_extended']:getSharedObject()
+
 local function GetxPlayer(source)
-    return exports['es_extended']:getSharedObject().GetPlayerFromId(source)
+    return ESX.GetPlayerFromId(source)
 end
 
 function Bridge.Inventory.HasItem(source, item, count)

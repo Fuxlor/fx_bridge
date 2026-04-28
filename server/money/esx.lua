@@ -2,12 +2,10 @@ if Bridge.Detected.framework ~= 'esx' then return end
 
 Bridge.Money = Bridge.Money or {}
 
-local function GetESX()
-    return exports['es_extended']:getSharedObject()
-end
+ESX = exports['es_extended']:getSharedObject()
 
 function Bridge.Money.Get(source, account)
-    local xPlayer = GetESX().GetPlayerFromId(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
     if not xPlayer then return 0 end
     if not account or account == 'cash' then
         return xPlayer.getMoney()

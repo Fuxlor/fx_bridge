@@ -8,10 +8,6 @@ author      'Fuxlor'
 
 lua54 'yes'
 
-dependencies {
-    'oxmysql',
-}
-
 optional_dependencies {
     'ox_lib',
     'ox_target',

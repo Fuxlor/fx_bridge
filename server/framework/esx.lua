@@ -1,15 +1,6 @@
 if Bridge.Detected.framework ~= 'esx' then return end
 
-local ESX = nil
-
--- Lazy-load ESX object (handles both legacy and modern ESX)
-local function GetESX()
-    if ESX then return ESX end
-    if exports['es_extended'] then
-        ESX = exports['es_extended']:getSharedObject()
-    end
-    return ESX
-end
+ESX = exports['es_extended']:getSharedObject()
 
 -- ─── Player object factory ───────────────────────────────────────────────────
 
@@ -78,15 +69,11 @@ end
 Bridge.Framework = Bridge.Framework or {}
 
 function Bridge.Framework.GetPlayer(source)
-    local esx = GetESX()
-    if not esx then return nil end
-    return WrapPlayer(esx.GetPlayerFromId(source))
+    return WrapPlayer(ESX.GetPlayerFromId(source))
 end
 
 function Bridge.Framework.GetPlayerFromIdentifier(identifier)
-    local esx = GetESX()
-    if not esx then return nil end
-    local xPlayers = esx.GetExtendedPlayers()
+    local xPlayers = ESX.GetExtendedPlayers()
     for _, xPlayer in ipairs(xPlayers) do
         if xPlayer.identifier == identifier then
             return WrapPlayer(xPlayer)
@@ -96,20 +83,20 @@ function Bridge.Framework.GetPlayerFromIdentifier(identifier)
 end
 
 function Bridge.Framework.GetIdentifier(source)
-    local esx = GetESX()
-    if not esx then return nil end
-    local xPlayer = esx.GetPlayerFromId(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
     return xPlayer and xPlayer.identifier or nil
 end
 
 function Bridge.Framework.GetAllPlayers()
-    local esx = GetESX()
-    if not esx then return {} end
     local result = {}
-    for _, xPlayer in ipairs(esx.GetExtendedPlayers()) do
+    for _, xPlayer in ipairs(ESX.GetExtendedPlayers()) do
         result[#result + 1] = WrapPlayer(xPlayer)
     end
     return result
 end
+
+AddEventHandler('esx:playerLoaded', function(source, xPlayer)
+    TriggerEvent('fx:playerLoaded')
+end)
 
 Bridge.Debug('ESX framework module loaded')
