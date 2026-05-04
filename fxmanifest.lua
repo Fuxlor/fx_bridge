@@ -63,6 +63,7 @@ server_scripts {
 }
 
 client_scripts {
+    '@ox_lib/init.lua',
     -- Framework
     'client/framework/esx.lua',
     'client/framework/qbcore.lua',
