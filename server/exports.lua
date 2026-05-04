@@ -42,3 +42,6 @@ exports('Log', Bridge.Logger.Log)
 -- ─── Misc ────────────────────────────────────────────────────────────────────
 exports('GetDetected',     function() return Bridge.Detected end)
 exports('GeneratePlate',   Bridge.GeneratePlate)
+
+-- ─── CL/SV Link ────────────────────────────────────────────────────────────────
+exports('Notify', function(player, message, type, duration) TriggerClientEvent('fx_bridge:client:notify', player, message, type, duration) end)

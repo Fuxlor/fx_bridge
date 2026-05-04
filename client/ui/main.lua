@@ -42,15 +42,29 @@ end)
 
 -- ─── Help text ───────────────────────────────────────────────────────────────
 
+local helpText = nil
+
 function Bridge.UI.ShowHelpText(text)
-    BeginTextCommandDisplayHelp('STRING')
-    AddTextComponentSubstringPlayerName(text)
-    EndTextCommandDisplayHelp(0, false, true, -1)
+    helpText = text
 end
 
 function Bridge.UI.HideHelpText()
+    helpText = nil
     ClearAllHelpMessages()
 end
+
+CreateThread(function()
+    while true do
+        if helpText then
+            BeginTextCommandDisplayHelp('STRING')
+            AddTextComponentSubstringPlayerName(helpText)
+            EndTextCommandDisplayHelp(0, false, false, -1)
+            Wait(0)
+        else
+            Wait(250)
+        end
+    end
+end)
 
 -- ─── Native progress bar (shared implementation) ─────────────────────────────
 
@@ -76,7 +90,15 @@ end
 
 -- ─── No-op stubs ─────────────────────────────────────────────────────────────
 
-local stubs = { 'Notify', 'ProgressBar', 'ShowTextUI', 'HideTextUI' }
+if not Bridge.UI.ShowTextUI then
+    Bridge.UI.ShowTextUI = Bridge.UI.ShowHelpText
+end
+
+if not Bridge.UI.HideTextUI then
+    Bridge.UI.HideTextUI = Bridge.UI.HideHelpText
+end
+
+local stubs = { 'Notify', 'ProgressBar' }
 for _, fn in ipairs(stubs) do
     if not Bridge.UI[fn] then
         Bridge.UI[fn] = function()

@@ -21,7 +21,7 @@ Config.Fuel = 'auto'
 -- Locale : 'fr' | 'en'
 Config.Locale = 'fr'
 
-Config.Debug = false
+Config.Debug = true
 
 -- Plate generation format — '1' = digit, 'A' = letter
 Config.PlateFormat = '11AAA111'

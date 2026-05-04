@@ -519,6 +519,22 @@ Bridge.Vehicle.SetFuel = Bridge.Fuel.Set
 ---@return string
 Bridge.Vehicle.GeneratePlate = Bridge.GeneratePlate
 
+function Bridge.Vehicle.GetEntityFromPlate(plate)
+    if not plate then return nil end
+    local normalized = tostring(plate):gsub('%s+', ''):upper()
+
+    for _, vehicle in ipairs(GetGamePool('CVehicle')) do
+        if DoesEntityExist(vehicle) then
+            local vehPlate = GetVehicleNumberPlateText(vehicle):gsub('%s+', ''):upper()
+            if vehPlate == normalized then
+                return vehicle
+            end
+        end
+    end
+
+    return nil
+end
+
 -- ─── Spawn ───────────────────────────────────────────────────────────────────
 
 ---Spawn a vehicle at the given position and apply optional props.

@@ -18,10 +18,16 @@ function Bridge.UI.ProgressBar(label, duration, canCancel, onFinish, onCancel)
     end)
 end
 
+local activeTextUI = nil
+
 function Bridge.UI.ShowTextUI(text, type)
+    if activeTextUI == text then return end
+    activeTextUI = text
     lib.showTextUI(text, { position = 'right-center' })
 end
 
 function Bridge.UI.HideTextUI()
+    if not activeTextUI then return end
+    activeTextUI = nil
     lib.hideTextUI()
 end

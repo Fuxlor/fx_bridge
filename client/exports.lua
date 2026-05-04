@@ -35,6 +35,7 @@ exports('GetEngineHealth',    Bridge.Vehicle.GetEngineHealth)
 exports('GetBodyHealth',      Bridge.Vehicle.GetBodyHealth)
 exports('SetVehicleHealth',   Bridge.Vehicle.SetHealth)
 exports('GeneratePlate',      Bridge.Vehicle.GeneratePlate)
+exports('GetEntityFromPlate', Bridge.Vehicle.GetEntityFromPlate)
 exports('SpawnVehicle',       Bridge.Vehicle.Spawn)
 exports('DeleteVehicle',      Bridge.Vehicle.Delete)
 
