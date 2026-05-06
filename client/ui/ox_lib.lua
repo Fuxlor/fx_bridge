@@ -3,7 +3,15 @@ if Bridge.Detected.notify ~= 'ox_lib' then return end
 Bridge.UI = Bridge.UI or {}
 
 function Bridge.UI.Notify(message, type, duration)
-    lib.notify({ type = type or 'inform', description = message, duration = duration or 4000 })
+    -- lib.notify({ type = type or 'inform', description = message, duration = duration or 4000 })
+    local rsc = GetInvokingResource()
+
+    TriggerEvent('fux_notify:showNotification', {
+        title = 'FX Scripts',
+        subtitle = rsc,
+        message = message,
+        duration = duration
+    })
 end
 
 function Bridge.UI.ProgressBar(label, duration, canCancel, onFinish, onCancel)

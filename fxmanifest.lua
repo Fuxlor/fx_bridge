@@ -103,5 +103,7 @@ client_scripts {
     -- Vehicle
     'client/vehicle/standalone.lua',
 
+    'client/cl_sv_link/main.lua',
+    
     'client/exports.lua',
 }

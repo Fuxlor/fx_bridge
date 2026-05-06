@@ -99,4 +99,8 @@ AddEventHandler('esx:playerLoaded', function(source, xPlayer)
     TriggerEvent('fx:playerLoaded')
 end)
 
+AddEventHandler('esx:setJob', function(source, job, lastjob)
+    TriggerEvent('fx:setJob', source, job, lastjob)
+end)
+
 Bridge.Debug('ESX framework module loaded')
